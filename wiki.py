@@ -1,7 +1,7 @@
-from bs4 import BeautifulSoup
-import urllib.request
 import urllib.parse
-import re
+import urllib.request
+
+from bs4 import BeautifulSoup
 
 unsupport = ['纪行', '祈愿', '冒险等阶']
 
@@ -34,12 +34,12 @@ def format_result(zh):
         # 将标签内容加入列表
 
         if thlist[5] == "元素属性\n":  # 判定百科内容是否为角色,并判定角色星级
-            star = ""
             mz = tdlist[1].replace('\n', '')
 
             if s_img.get('src') == "https://patchwiki.biligame.com/images/ys/c/c7/qu6xcndgj6t14oxvv7yz2warcukqv1m.png":
                 star = "5星"
-            elif s_img.get('src') == "https://patchwiki.biligame.com/images/ys/9/9c/sklp02ffk3aqszzvh8k1c3139s0awpd.png":
+            elif s_img.get(
+                    'src') == "https://patchwiki.biligame.com/images/ys/9/9c/sklp02ffk3aqszzvh8k1c3139s0awpd.png":
                 star = "4星"
             else:
                 star = "未知星级"
@@ -53,3 +53,8 @@ def format_result(zh):
     except urllib.error.HTTPError as e:  # 错误参数处理
         if e.reason == "Not Found":
             return "找不到这个词条"
+
+
+# MingxuanGame: 代码main接口
+if __name__ == '__main__':
+    print(format_result(input(">>> ")))

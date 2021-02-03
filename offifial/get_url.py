@@ -13,16 +13,19 @@ soup = BeautifulSoup(html, 'html.parser')  # 创建soup对象，获取html代码
 
 list = soup.find_all('li', {"class": "position-list__item"})
 
-titlelist = []
-urllist = []
-allist = []
+TitleList = []
+ImageUrlList = []
+DetailedUrlList = []
+# alList = []
 
-i = 1
 for i in range(len(list)):
     item = str(list[i])
-    url = re.findall('"href="(.*)" t', item, re.S)
+    ImageUrl = re.findall('data-src="(.*)"/>', item, re.S)  # MingxuanGame:修复阴间url + 增加图片信息url
+    DetailedUrl = re.findall('href="(.*)" t', item, re.S)  # MingxuanGame:增加详细信息url
     title = re.findall('title="(.*)">', item, re.S)
-    titlelist.append(title)
-    urllist.append(url)
-    print(titlelist)
-    i += 1
+    TitleList.append(title)
+    ImageUrlList.append(ImageUrl)
+    DetailedUrlList.append("https://bbs.mihoyo.com/" + DetailedUrl[0])
+print(TitleList)
+print(ImageUrlList)
+print(DetailedUrlList)
