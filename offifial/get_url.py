@@ -16,16 +16,18 @@ list = soup.find_all('li', {"class": "position-list__item"})
 TitleList = []
 ImageUrlList = []
 DetailedUrlList = []
-# alList = []
 
 for i in range(len(list)):
     item = str(list[i])
     ImageUrl = re.findall('data-src="(.*)\?x-oss-process=image/quality,q_75/resize,s_20"/>', item, re.S)  # MingxuanGame:修复阴间url + 增加图片信息url
     DetailedUrl = re.findall('href="(.*)" t', item, re.S)  # MingxuanGame:增加详细信息url
     title = re.findall('title="(.*)">', item, re.S)
-    TitleList.append(title)
-    ImageUrlList.append(ImageUrl)
+    TitleList.append(title[0])
+    ImageUrlList.append(ImageUrl[0])
     DetailedUrlList.append("https://bbs.mihoyo.com/" + DetailedUrl[0])
-print(TitleList)
-print(ImageUrlList)
-print(DetailedUrlList)
+# print(TitleList)
+# print(ImageUrlList)
+# print(DetailedUrlList)
+allist = dict(zip(TitleList,DetailedUrlList))
+print(allist)
+
