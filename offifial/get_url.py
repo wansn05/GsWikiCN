@@ -1,3 +1,4 @@
+import json
 from bs4 import BeautifulSoup
 import urllib.request
 import urllib.parse
@@ -29,5 +30,7 @@ for i in range(len(list)):
 # print(ImageUrlList)
 # print(DetailedUrlList)
 allist = dict(zip(TitleList,DetailedUrlList))
+with open('weapon_list.json', 'w',encoding='utf-8') as f:
+    json.dump(obj=allist,fp=f ,sort_keys=True, indent=4, separators=(',', ':'), ensure_ascii=False)
 print(allist)
 
